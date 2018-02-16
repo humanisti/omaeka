@@ -1,0 +1,34 @@
+<h1>{{nimi}}</h1>
+<p><strong>Sähköposti:</strong> {{email}}</p>
+<p><strong>Osoite:</strong> {{osoite.katuosoite}}, {{osoite.postiosoite}}</p>
+<button (click)="vaihdaHarrastukset()">{{naytaHarrastukset ? "Piilota harrastukset" : "Näytä harrastukset"}}</button>
+<div *ngIf="naytaHarrastukset">
+<h3>Harrastukset:</h3>
+    <ul>
+        <li *ngFor="let harrastus of harrastukset; let i = index">
+        {{harrastus}} <button (click)="poistaHarrastus(i)">X</button>
+        </li>
+    </ul>
+    <form (submit)="lisaaHarrastus(harrastus.value)">
+        <label>Lisää harrastus: </label><br />
+        <input type="text" #harrastus /><br />
+    </form>
+</div>
+<hr />
+<h3>Muokkaa käyttäjää</h3>
+<form>
+    <label>Nimi: </label><br />
+    <input type="text" name="nimi" [(ngModel)]="nimi" /><br />
+    <label>Sähköpostiosoite: </label><br />
+    <input type="text" name="email" [(ngModel)]="email" /><br />
+    <label>Katuosoite: </label><br />
+    <input type="text" name="osoite.katuosoite" [(ngModel)]="osoite.katuosoite" /><br />
+    <label>Postinumero ja postitoimipaikka: </label><br />
+    <input type="text" name="osoite.postiosoite" [(ngModel)]="osoite.postiosoite" /><br />
+</form>
+<hr />
+<h3>Posts</h3>
+<div *ngFor="let post of posts">
+    <h3>{{post.title}}</h3>
+    <p>{{post.body}}</p>
+</div>
